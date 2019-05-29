@@ -32,16 +32,15 @@ public class Worker {
         		delta = planetA.getPositionY() - planetB.getPositionY();
         	}
             //double force = G * planetA.mass * planetB.mass / (Math.pow(distance, 2));
-
-            double speedA = (planetB.getMassPerGravity() * Constants.DELTA_TIME) / delta;
-            double speedB = (-1 * planetA.getMassPerGravity() * Constants.DELTA_TIME) / delta;
+            double accelerationA = (planetB.getMassPerGravity()) / delta;
+            double accelerationB = (-1 * planetA.getMassPerGravity()) / delta;
 
             if( axis == "x") {
-        		planetA.updateSpeedX(speedA);
-        		planetB.updateSpeedX(speedB);
+        		planetA.updateAccelerationX(accelerationA);
+        		planetB.updateAccelerationX(accelerationB);
         	}else {
-        		planetA.updateSpeedY(speedA);
-        		planetB.updateSpeedY(speedB);
+        		planetA.updateAccelerationY(accelerationA);
+        		planetB.updateAccelerationY(accelerationB);
         	}
             /*
             

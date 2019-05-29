@@ -9,6 +9,8 @@ public class Planet {
 	private double speedX;
 	private double speedY;
 	private double massPerGravity;
+	private double accelerationX;
+	private double accelerationY;
 
 	public Planet(int positionX, int positionY) {
 		this.setMass(Math.random() * 200 + 100);
@@ -60,12 +62,20 @@ public class Planet {
 		this.massPerGravity = massPerGravity;
 	}
 	
-	public synchronized void updateSpeedY(double partialSpeedY) {
-		this.speedY = this.speedY + partialSpeedY;
+	public double getAccelerationX() {
+		return accelerationX;
 	}
-	
-	public synchronized void updateSpeedX(double partialSpeedX) {
-		this.speedX = this.speedX + partialSpeedX;
+
+	public void updateAccelerationX(double accelerationX) {
+		this.accelerationX = this.accelerationX + accelerationX;
+	}
+
+	public double getAccelerationY() {
+		return accelerationY;
+	}
+
+	public void updateAccelerationY(double accelerationY) {
+		this.accelerationY = this.accelerationY + accelerationY;
 	}
 	
 
