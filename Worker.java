@@ -8,7 +8,9 @@ public class Worker {
 	}
 	
 	public void startWorker() {
-		for(int i = 0; )
+		for(int i = 0; i < Constants.PLANET_NUMBER; i++) {
+			
+		}
 	}
 	
 	

@@ -9,7 +9,10 @@ public class PlanetManager {
 	public PlanetManager() {
 		planetsList = new ArrayList<Planet>();
 		for(int i = 0; i < Constants.PLANET_NUMBER; i++) {
-			planetsList.add(new Planet((int)(Math.random() * Constants.DRAWING_PANEL_SIZE_X),(int)(Math.random() * Constants.DRAWING_PANEL_SIZE_Y)));
+			planetsList.add(
+					new Planet(
+							(int)(Math.random() * Constants.DRAWING_PANEL_SIZE_X),
+							(int)(Math.random() * Constants.DRAWING_PANEL_SIZE_Y)));
 		}
 	}
 
