@@ -1,15 +1,28 @@
 package es1;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class Worker {
 	PlanetManager planetManager;
+	ExecutorService exec;
 
 	public Worker(PlanetManager planetManager) {
 		this.planetManager = planetManager;
 	}
 	
 	public void startWorker() {
-		for(int i = 0; i < Constants.PLANET_NUMBER; i++) {
-			
+        exec = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+		while(true) {
+			//semaphore waiting all uupdatePlanetPositions
+			for(int i = 0; i < Constants.PLANET_NUMBER; i++) {
+				for (int j = i; j < Constants.PLANET_NUMBER; j++) {
+					exec.submit(new ComputeAccelerations(planetManager, i, j,"x"));
+					exec.submit(new ComputeAccelerations(planetManager, i, j,"y"));
+				}
+				exec.submit(new ComputePositions(planetManager,i, "x"));
+				exec.submit(new ComputePositions(planetManager,i, "y"));
+			}
 		}
 	}
 	
@@ -38,7 +51,7 @@ public class Worker {
     	PlanetManager planetManager; 
     	String axis;
 
-        public ComputePositions(int planetNumber, String axis, PlanetManager planetManager) {
+        public ComputePositions(PlanetManager planetManager, int planetNumber, String axis) {
             this.planetManager = planetManager;
             this.planetNumber = planetNumber;
             this.axis = axis;

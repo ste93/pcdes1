@@ -35,24 +35,24 @@ public class Planet {
 		return positionX;
 	}
 	
-	public void setPositionY(int positionY) {
+	public synchronized void setPositionY(int positionY) {
 		this.positionY = positionY;
 	}
 
-	public void setPositionX(int positionX) {
+	public synchronized void setPositionX(int positionX) {
 		this.positionX = positionX;
 	}
 	
 	public double getSpeedX() {
 		return speedX;
 	}
-	public void setSpeedX(double speedX) {
+	public synchronized void setSpeedX(double speedX) {
 		this.speedX = speedX;
 	}
 	public double getSpeedY() {
 		return speedY;
 	}
-	public void setSpeedY(double speedY) {
+	public synchronized void setSpeedY(double speedY) {
 		this.speedY = speedY;
 	}
 	public double getMassPerGravity() {
@@ -66,7 +66,7 @@ public class Planet {
 		return accelerationX;
 	}
 
-	public void updateAccelerationX(double accelerationX) {
+	public synchronized void updateAccelerationX(double accelerationX) {
 		this.accelerationX = this.accelerationX + accelerationX;
 	}
 
@@ -74,7 +74,7 @@ public class Planet {
 		return accelerationY;
 	}
 
-	public void updateAccelerationY(double accelerationY) {
+	public synchronized void updateAccelerationY(double accelerationY) {
 		this.accelerationY = this.accelerationY + accelerationY;
 	}
 	
