@@ -21,26 +21,33 @@ public class PlanetManager {
 		return this.planetsList;
 	}
 
-	public synchronized void updatePlanetsAcceleration(int planet1Number, int planet2Number, String axis) {
-    	int delta;
+	//lock done
+	public void updatePlanetsAcceleration(int planet1Number, int planet2Number) {
+		this.synchronizationManager.acquireAcceleration(planet1Number);
+		this.synchronizationManager.acquireAcceleration(planet2Number);
+    	int deltaX, deltaY;
     	Planet planetA = this.planetsList.get(planet1Number);
     	Planet planetB = this.planetsList.get(planet2Number);
-    	if( axis == "x") {
-    		delta = planetA.getPositionX() - planetB.getPositionX();
-    	}else {
-    		delta = planetA.getPositionY() - planetB.getPositionY();
-    	} 
-    	double deltaDouble = delta * delta;
-        double accelerationA = (planetB.getMassPerGravity()) / (deltaDouble);
-        double accelerationB = (-1 * planetA.getMassPerGravity()) /(deltaDouble);
-
-        if( axis == "x") {
-    		planetA.updateAccelerationX(accelerationA);
-    		planetB.updateAccelerationX(accelerationB);
-    	}else {
-    		planetA.updateAccelerationY(accelerationA);
-    		planetB.updateAccelerationY(accelerationB);
-    	}
+   		
+    	deltaX = planetA.getPositionX() - planetB.getPositionX();
+   		deltaY = planetA.getPositionY() - planetB.getPositionY();
+    	
+   		double deltaDoubleX = deltaX * deltaX;
+    	double deltaDoubleY = deltaY * deltaY;
+    	
+        double accelerationAX = (planetB.getMassPerGravity()) / (deltaDoubleX);
+        double accelerationBX = (-1 * planetA.getMassPerGravity()) /(deltaDoubleX);
+        double accelerationAY = (planetB.getMassPerGravity()) / (deltaDoubleY);
+        double accelerationBY = (-1 * planetA.getMassPerGravity()) /(deltaDoubleY);
+		
+        planetA.updateAccelerationX(accelerationAX);
+		planetB.updateAccelerationX(accelerationBX);
+		planetA.updateAccelerationY(accelerationAY);
+		planetB.updateAccelerationY(accelerationBY);
+		//TODO
+        System.out.println("updatePlanetsAcceleration " + planet1Number + " " + planet2Number);
+		this.synchronizationManager.releasePosition(planet1Number);
+		this.synchronizationManager.releasePosition(planet2Number);
 	}
 	
     private int calculateNewPosition(double initialPosition, double acceleration, double initialSpeed) {
@@ -56,22 +63,23 @@ public class PlanetManager {
     	return acceleration * Constants.DELTA_TIME + initialSpeed;    	
     }
     
-    public synchronized void updatePlanetPosition(int planetNumber, String axis) {
+    public void updatePlanetPosition(int planetNumber) {
+    	this.synchronizationManager.acquirePosition(planetNumber);//???
     	Planet planet = this.planetsList.get(planetNumber);
-    	if( axis == "x") {
     		planet.setPositionX(
     				calculateNewPosition(planet.getPositionX(),
     						planet.getAccelerationX(),
     						planet.getSpeedX()));
     		planet.setSpeedX(calculateNewSpeed(planet.getSpeedX(), planet.getAccelerationX()));
-    	}else {
     		planet.setPositionY(
     				calculateNewPosition(planet.getPositionY(),
     						planet.getAccelerationY(),
     						planet.getSpeedY())); 
     		planet.setSpeedY(calculateNewSpeed(planet.getSpeedY(), planet.getAccelerationY()));
-
-    	}     	
+    		//TODO
+            System.out.println("updatePlanetPosition " + planetNumber);
+    	this.synchronizationManager.releaseWorker();
+    	this.synchronizationManager.releaseGraphicLock();
     }
 }
 

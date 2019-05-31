@@ -6,9 +6,13 @@ import java.util.concurrent.Executors;
 public class Worker {
 	PlanetManager planetManager;
 	ExecutorService exec;
+	GraphicSwing graphic;
+	SynchronizationManager synchronizationManager;
 
-	public Worker(PlanetManager planetManager) {
+	public Worker(PlanetManager planetManager, GraphicSwing graphic, SynchronizationManager synchronizationManager) {
 		this.planetManager = planetManager;
+		this.graphic = graphic;
+		this.synchronizationManager = synchronizationManager;
 	}
 	
 	public void startWorker() {
@@ -17,12 +21,15 @@ public class Worker {
 			//semaphore waiting all uupdatePlanetPositions
 			for(int i = 0; i < Constants.PLANET_NUMBER; i++) {
 				for (int j = i; j < Constants.PLANET_NUMBER; j++) {
-					exec.submit(new ComputeAccelerations(planetManager, i, j,"x"));
-					exec.submit(new ComputeAccelerations(planetManager, i, j,"y"));
+					exec.submit(new ComputeAccelerations(planetManager, i, j));
 				}
-				exec.submit(new ComputePositions(planetManager,i, "x"));
-				exec.submit(new ComputePositions(planetManager,i, "y"));
+				exec.submit(new ComputePositions(planetManager,i));
 			}
+			synchronizationManager.acquireButtonLock();
+			synchronizationManager.acquireWorker();
+			synchronizationManager.releaseButtonLock();
+			//this is asynchronous
+			graphic.updatePanel();
 		}
 	}
 	
@@ -31,35 +38,31 @@ public class Worker {
     	int planet1Number;
     	int planet2Number;
     	PlanetManager planetManager;
-    	String axis;
 
-        public ComputeAccelerations(PlanetManager planetManager, int planet1Number, int planet2Number, String axis) {
+        public ComputeAccelerations(PlanetManager planetManager, int planet1Number, int planet2Number) {
         	this.planet1Number = planet1Number;
         	this.planet2Number = planet2Number;
         	this.planetManager = planetManager;
-            this.axis = axis;
         }
 
         @Override
         public void run() {
-        	planetManager.updatePlanetsAcceleration(planet1Number, planet2Number, axis);
+        	planetManager.updatePlanetsAcceleration(planet1Number, planet2Number);
         }
     }
     
     private static class ComputePositions implements Runnable {
     	int planetNumber;
     	PlanetManager planetManager; 
-    	String axis;
 
-        public ComputePositions(PlanetManager planetManager, int planetNumber, String axis) {
+        public ComputePositions(PlanetManager planetManager, int planetNumber) {
             this.planetManager = planetManager;
             this.planetNumber = planetNumber;
-            this.axis = axis;
         }
         
         @Override
         public void run() {
-        	planetManager.updatePlanetPosition(planetNumber, axis);
+        	planetManager.updatePlanetPosition(planetNumber);
         }
     }
 }

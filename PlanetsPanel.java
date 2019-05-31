@@ -29,7 +29,9 @@ public class PlanetsPanel extends JPanel {
     }
 
 	
+    //this need to be asynchronous
 	protected void paintComponent(Graphics g) {
+		System.out.println("paintComponent");
 		synchronizationManager.acquireGraphicLock();
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
@@ -43,6 +45,6 @@ public class PlanetsPanel extends JPanel {
             g2d.fill(endCustomer);
             g2d.setColor(Color.BLACK);
         }
-        synchronizationManager.releaseGraphicLock();
+        this.synchronizationManager.releaseAcceleration();
     }
 }

@@ -7,9 +7,9 @@ public class Main {
 		SynchronizationManager syncronizationManager = new SynchronizationManager();
 		PlanetManager planetManager = new PlanetManager(syncronizationManager);
 		PlanetsPanel panel = new PlanetsPanel(planetManager, syncronizationManager);
-		GraphicSwing graphic = new GraphicSwing(panel);
+		GraphicSwing graphic = new GraphicSwing(panel, syncronizationManager);
 		graphic.startGUI();
-		Worker worker = new Worker(planetManager);
+		Worker worker = new Worker(planetManager, graphic, syncronizationManager);
 		worker.startWorker();		
 	}
 }

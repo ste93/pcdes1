@@ -1,5 +1,6 @@
 package es1;
 
+
 import javax.swing.*;  
 
 public class GraphicSwing {
@@ -7,11 +8,12 @@ public class GraphicSwing {
 	 * 
 	 */
 	JFrame frame;
-	
+	SynchronizationManager synchronizationManager;	
 	PlanetsPanel panel;
 
-	public GraphicSwing(PlanetsPanel panel) {  
+	public GraphicSwing(PlanetsPanel panel, SynchronizationManager synchronizationManager) {  
 		this.panel = panel;
+		this.synchronizationManager = synchronizationManager;
 	}
 /*        //Create and set up the window.
         frame = new JFrame("Simulazione degli N-corpi");
