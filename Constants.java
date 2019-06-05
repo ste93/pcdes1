@@ -13,4 +13,5 @@ public interface Constants {
 	public int DRAWING_PANEL_SIZE_Y = PANEL_SIZE_Y;
 	public int BUTTON_SIZE_X = PANEL_BORDER_SIZE_X - BUTTON_SPACING * 2;
 	public int BUTTON_SIZE_Y = 40;
+	public int MIN_DISTANCE_BETWEEN_PLANETS = 10;
 }
