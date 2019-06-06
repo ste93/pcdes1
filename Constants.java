@@ -3,7 +3,7 @@ package es1;
 public interface Constants {
 
 	public int PLANET_NUMBER = 6;
-	public int DELTA_TIME = 2;
+	public int DELTA_TIME = 1;
 	public double GRAVITY = 6.67408 * 10E-11;
 	public int PANEL_SIZE_X = 1300;
 	public int PANEL_SIZE_Y = 700;

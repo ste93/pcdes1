@@ -13,9 +13,9 @@ public class Planet {
 	private double accelerationY;
 
 	public Planet(int positionX, int positionY) {
-		this.setMass(Math.random() * 5 + 10);
-		this.setSpeedX(Math.random() * 3 + 7);
-		this.setSpeedY(Math.random() * 3 + 7);
+		this.setMass(Math.random() * 100 + 5);
+		this.setSpeedX(Math.random() - 0.5);
+		this.setSpeedY(Math.random() - 0.5);
 		this.positionX = positionX;
 		this.positionY = positionY;
 	}

@@ -7,7 +7,7 @@ public class SynchronizationManager {
 	public ArrayList<Semaphore> accelerationSemaphore, positionSemaphore, updatedPositionSemaphore;
 	//public ArrayList<Semaphore> positionSemaphore;
 	public Semaphore graphicSemaphore, buttonSemaphore, workerSemaphore; 
-	
+	public boolean buttonLock = false;
 	public SynchronizationManager() {
 		this.accelerationSemaphore = new ArrayList<Semaphore>();
 		this.positionSemaphore = new ArrayList<Semaphore>();
@@ -59,6 +59,16 @@ public class SynchronizationManager {
 		//TODO
         //System.out.println("releaseButtonLock");
 		this.buttonSemaphore.release();
+	}
+	
+	public synchronized void buttonClick() {
+		if (this.buttonLock) {
+			this.releaseButtonLock();
+		}
+		else {
+			this.acquireButtonLock();
+		}
+		this.buttonLock = !this.buttonLock;
 	}
 	
 	

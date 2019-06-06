@@ -67,7 +67,7 @@ public class PlanetManager {
     }
     
     public void updatePlanetPosition(int planetNumber) {
-    	this.synchronizationManager.acquirePosition(planetNumber);//???
+    	this.synchronizationManager.acquirePosition(planetNumber);
     	Planet planet = this.planetsList.get(planetNumber);
     	boolean updatePositions = true;
     	for (int i = 0; i < planetNumber;i++) {
