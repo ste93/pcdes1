@@ -1,3 +1,7 @@
+
+package es1;
+
+
 public class Planet {
 	//fields
 	private double mass; // for simplicity is integer, not double, suppose that grams are not useful

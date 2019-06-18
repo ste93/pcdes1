@@ -1,3 +1,6 @@
+
+package es1;
+
 public interface Constants {
 
 	public int PLANET_NUMBER = 6;
