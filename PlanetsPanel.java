@@ -29,10 +29,7 @@ public class PlanetsPanel extends JPanel {
     }
 
 	
-    //this need to be asynchronous
 	protected void paintComponent(Graphics g) {
-		//TODO
-		System.out.println("paintComponent");
 		synchronizationManager.acquireGraphicLock();
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
@@ -41,9 +38,12 @@ public class PlanetsPanel extends JPanel {
 
         for(Planet p : this.planetManager.getPlanetsList()) {
             g2d.setColor(Color.RED);
-            //TODO
+            //TODO delete
             System.out.println(p.getPositionX() + " " + p.getPositionY());
-            Ellipse2D.Double endCustomer = new Ellipse2D.Double(p.getPositionX(), p.getPositionY(), 10, 10);
+            Ellipse2D.Double endCustomer = new Ellipse2D.Double(p.getPositionX(),///Constants.DRAWING_PANEL_SIZE_X, 
+            													p.getPositionY(), // / Constants.DRAWING_PANEL_SIZE_Y, 
+            													10, 
+            													10);
             g2d.draw(endCustomer);
             g2d.fill(endCustomer);
             g2d.setColor(Color.BLACK);

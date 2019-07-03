@@ -3,7 +3,6 @@ package es1;
 
 
 public class Main {
-	//random between 0 and 1
 	public static void main(String[] args) {
 		SynchronizationManager syncronizationManager = new SynchronizationManager();
 		PlanetManager planetManager = new PlanetManager(syncronizationManager);

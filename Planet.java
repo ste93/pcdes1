@@ -2,21 +2,25 @@
 package es1;
 
 
+import java.math.BigDecimal;
+
 public class Planet {
 	//fields
 	private double mass; // for simplicity is integer, not double, suppose that grams are not useful
 	private int positionX; //position is intended as pixel, so is integer
 	private int positionY;
-	private double speedX;
-	private double speedY;
-	private double massPerGravity;
-	private double accelerationX;
-	private double accelerationY;
+	private BigDecimal speedX;
+	private BigDecimal speedY;
+	private Double massPerGravity;
+	private BigDecimal accelerationX;
+	private BigDecimal accelerationY;
 
 	public Planet(int positionX, int positionY) {
-		this.setMass(Math.random() * 100 + 5);
-		this.setSpeedX(Math.random() - 0.5);
-		this.setSpeedY(Math.random() - 0.5);
+		this.setMass(Math.random() * Constants.MAX_MASS + 120000000);
+		this.setSpeedX(BigDecimal.valueOf(Math.random()*2 - 1));
+		this.setSpeedY(BigDecimal.valueOf(Math.random()*2 - 1));
+		this.initAccelerationX();
+		this.initAccelerationY();
 		this.positionX = positionX;
 		this.positionY = positionY;
 	}
@@ -44,16 +48,16 @@ public class Planet {
 		this.positionX = positionX;
 	}
 	
-	public double getSpeedX() {
+	public BigDecimal getSpeedX() {
 		return speedX;
 	}
-	public synchronized void setSpeedX(double speedX) {
+	public synchronized void setSpeedX(BigDecimal speedX) {
 		this.speedX = speedX;
 	}
-	public double getSpeedY() {
+	public BigDecimal getSpeedY() {
 		return speedY;
 	}
-	public synchronized void setSpeedY(double speedY) {
+	public synchronized void setSpeedY(BigDecimal speedY) {
 		this.speedY = speedY;
 	}
 	public double getMassPerGravity() {
@@ -63,20 +67,36 @@ public class Planet {
 		this.massPerGravity = massPerGravity;
 	}
 	
-	public double getAccelerationX() {
+	public BigDecimal getAccelerationX() {
 		return accelerationX;
 	}
+	
+	public void invertAccelerationX() {
+		this.accelerationX = this.accelerationX.negate();
 
-	public synchronized void updateAccelerationX(double accelerationX) {
-		this.accelerationX = this.accelerationX + accelerationX;
+	}
+	
+	public void invertAccelerationY() {
+		this.accelerationY = this.accelerationY.negate();
 	}
 
-	public double getAccelerationY() {
+	public synchronized void updateAccelerationX(BigDecimal accelerationX) {
+		this.accelerationX.add(accelerationX);
+	}
+
+	public BigDecimal getAccelerationY() {
 		return accelerationY;
 	}
 
-	public synchronized void updateAccelerationY(double accelerationY) {
-		this.accelerationY = this.accelerationY + accelerationY;
+	private void initAccelerationY() {
+		this.accelerationY = BigDecimal.valueOf(0);
+	}
+	private void initAccelerationX() {
+		this.accelerationX = BigDecimal.valueOf(0);
+	}
+
+	public synchronized void updateAccelerationY(BigDecimal accelerationY) {
+		this.accelerationY = this.accelerationY.add(accelerationY);
 	}
 	
 

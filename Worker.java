@@ -18,7 +18,6 @@ public class Worker {
 	public void startWorker() {
         exec = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 		while(true) {
-			//semaphore waiting all uupdatePlanetPositions
 			for(int i = 0; i < Constants.PLANET_NUMBER; i++) {
 				for (int j = i+1; j < Constants.PLANET_NUMBER; j++) {
 					exec.submit(new ComputeAccelerations(planetManager, i, j));
@@ -28,13 +27,12 @@ public class Worker {
 			synchronizationManager.acquireButtonLock();
 			synchronizationManager.acquireWorker();
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(100);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+
 			synchronizationManager.releaseButtonLock();
-			//this is asynchronous
 			graphic.updatePanel();
 		}
 	}
