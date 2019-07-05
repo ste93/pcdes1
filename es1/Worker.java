@@ -31,9 +31,9 @@ public class Worker {
                 exec.submit(new ComputePositions(planetManager, i));
             }
             synchronizationManager.acquireButtonLock();
+            synchronizationManager.releaseButtonLock();
             synchronizationManager.acquireWorker();
 
-            synchronizationManager.releaseButtonLock();
             graphic.updatePanel();
         }
     }

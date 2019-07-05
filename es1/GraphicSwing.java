@@ -38,6 +38,9 @@ public class GraphicSwing {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            //TODO delete
+            System.out.println("acquired button lock before  click");
+
             this.synchronizationManager.buttonClick();
             //TODO delete
             System.out.println("acquired button lock after click");

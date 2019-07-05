@@ -48,6 +48,8 @@ public class SynchronizationManager {
     //BUTTON
     public void acquireButtonLock() {
         try {
+            //TODO delete
+            System.out.println("acquiring button lock");
             this.buttonSemaphore.acquire();
             //TODO delete
             System.out.println("acquired button lock");
@@ -130,12 +132,21 @@ public class SynchronizationManager {
     //////////////////////////////////////////////////////////
     //WORKER
     public void releaseWorker() {
+        //TODO delete
+        System.out.println("releasing worker lock");
         this.workerSemaphore.release();
+        //TODO delete
+        System.out.println("released worker lock");
+
     }
 
     public void acquireWorker() {
         try {
+            //TODO delete
+            System.out.println("acquiring worker lock");
             this.workerSemaphore.acquire(es1.Constants.PLANET_NUMBER);
+            //TODO delete
+            System.out.println("acquired worker lock");
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
