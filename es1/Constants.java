@@ -1,10 +1,9 @@
-	
 package es1;
 
 public interface Constants {
 
 	
-	int PLANET_NUMBER = 6;
+	int PLANET_NUMBER = 3;
 	int DELTA_TIME = 1;
 	double GRAVITY = 6.67408 * 10E-11;
 	
