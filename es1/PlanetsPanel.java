@@ -43,7 +43,7 @@ public class PlanetsPanel extends JPanel {
                     p.getPositionY(), // / Constants.DRAWING_PANEL_SIZE_Y,
                     10,
                     10);
-            g2d.draw(endCustomer);
+           g2d.draw(endCustomer);
             g2d.fill(endCustomer);
             g2d.setColor(Color.BLACK);
         }
