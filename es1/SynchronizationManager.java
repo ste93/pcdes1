@@ -49,6 +49,8 @@ public class SynchronizationManager {
     public void acquireButtonLock() {
         try {
             this.buttonSemaphore.acquire();
+            //TODO delete
+            System.out.println("acquired button lock");
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

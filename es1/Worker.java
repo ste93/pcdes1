@@ -10,14 +10,17 @@ public class Worker {
     es1.GraphicSwing graphic;
     es1.SynchronizationManager synchronizationManager;
 
-    public Worker(es1.PlanetManager planetManager, es1.GraphicSwing graphic, es1.SynchronizationManager synchronizationManager) {
+
+    public Worker(es1.PlanetManager planetManager, es1.GraphicSwing graphic,
+                  es1.SynchronizationManager synchronizationManager,
+                  ExecutorService executorService) {
         this.planetManager = planetManager;
         this.graphic = graphic;
         this.synchronizationManager = synchronizationManager;
+        this.exec = executorService;
     }
 
     public void startWorker() throws InterruptedException {
-        exec = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
         while (true) {
             for (int i = 0; i < es1.Constants.PLANET_NUMBER; i++) {
                 for (int j = i + 1; j < es1.Constants.PLANET_NUMBER; j++) {

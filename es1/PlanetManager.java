@@ -98,7 +98,7 @@ public class PlanetManager {
                 planet.getAccelerationY(),
                 planet.getSpeedY()
         );
-
+/*
         if (newPositionX > es1.Constants.MAX_POSITION_X) {
             if (planet.getAccelerationX().compareTo(BigDecimal.ZERO) > 0)
                 planet.invertAccelerationX();
@@ -134,7 +134,7 @@ public class PlanetManager {
                     planet.getAccelerationY(),
                     planet.getSpeedY());
         }
-
+*/
         this.checkDistances(newPositionX, newPositionY, planetNumber, planet);
 
         this.synchronizationManager.releaseWorker();
